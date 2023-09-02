@@ -19,6 +19,12 @@
     gap: 1rem;
     margin: 1rem 1.5rem;
 }
+.name_symbol_watchlist{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
 .coin-logo{
     height: 3.5rem;
     width: 3.5rem;

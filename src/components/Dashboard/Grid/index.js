@@ -25,41 +25,44 @@ function Grid({coin, delay, isWatchlistPage}) {
              style={{ display: isWatchlistPage && !added && "none" }}
         >
             <div className = {`grid-container ${coin.price_change_percentage_24h < 0 && "grid-container-red"}`}>
-                <div className='info-flex'>
-                    <img src = {coin.image} className='coin-logo'/>
-                    <div className='name-col'>
-                        <p className='coin-symbol'>{coin.symbol}</p>
-                        <p className='coin-name'>{coin.name}</p>
+                <div class = "name_symbol_watchlist">
+                    <div className='info-flex'>
+                        <img src = {coin.image} className='coin-logo'/>
+                        <div className='name-col'>
+                            <p className='coin-symbol'>{coin.symbol}</p>
+                            <p className='coin-name'>{coin.name}</p>
+                        </div>
                     </div>
+                    <IconButton
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (added) {
+                                removeFromWatchlist(coin.id);
+                                setAdded(false);
+                            } else {
+                                addToWatchlist(coin.id);
+                                setAdded(true);
+                            }
+                            }}
+                        >
+                            {added ? (
+                            <StarRoundedIcon
+                                className={`watchlist-icon ${
+                                coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
+                                } `}
+                                sx={{ fontSize: "2rem !important" }}
+                            />
+                            ) : (
+                            <StarBorderRoundedIcon
+                                className={`watchlist-icon ${
+                                coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
+                                } `}
+                                sx={{ fontSize: "2rem !important" }}
+                            />
+                            )}
+                    </IconButton>
                 </div>
-                <IconButton
-                    onClick={(e) => {
-                        e.preventDefault();
-                        if (added) {
-                            removeFromWatchlist(coin.id);
-                            setAdded(false);
-                        } else {
-                            addToWatchlist(coin.id);
-                            setAdded(true);
-                        }
-                        }}
-                    >
-                        {added ? (
-                        <StarRoundedIcon
-                            className={`watchlist-icon ${
-                            coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
-                            } `}
-                            sx={{ fontSize: "2rem !important" }}
-                        />
-                        ) : (
-                        <StarBorderRoundedIcon
-                            className={`watchlist-icon ${
-                            coin.price_change_percentage_24h < 0 && "watchlist-icon-red"
-                            } `}
-                            sx={{ fontSize: "2rem !important" }}
-                        />
-                        )}
-                </IconButton>
+                
             {/* </div> */}
                 {coin.price_change_percentage_24h > 0 ? (
                     <div className='chip-flex'>
